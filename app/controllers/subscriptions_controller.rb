@@ -1,10 +1,10 @@
 class SubscriptionsController < ApplicationController
   def verify_apple_receipt
     opts = {
-      shared_secret: '72d6944b2acd42f0a2d1e9fdc3eb68c9',
+      shared_secret: ENV['apple_itunes_shared_secret'],
       exclude_old_transactions: true
     }
-    
+
     if receipt = Venice::Receipt.verify(receipt_data, opts)
       render json: { success: true, receipt: receipt }
     end
